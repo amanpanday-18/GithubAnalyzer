@@ -1,3 +1,5 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -16,36 +18,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const geminiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{ text: prompt }]
-        }]
-      })
-    });
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    if (!geminiResponse.ok) {
-      let errorText = 'Unknown error';
-      try {
-        const errorData = await geminiResponse.json();
-        errorText = errorData.error?.message || JSON.stringify(errorData);
-      } catch (e) {
-        errorText = await geminiResponse.text();
-      }
-      return res.status(geminiResponse.status).json({ error: `Gemini API Error: ${errorText}` });
-    }
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-    const data = await geminiResponse.json();
-    const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
-    
-    return res.status(200).json({ response: responseText });
+    return res.status(200).json({ response: text });
 
   } catch (error) {
-    console.error("Backend fetch error:", error);
-    return res.status(500).json({ error: "Failed to connect to Gemini API." });
+    console.error("Gemini SDK error:", error);
+    return res.status(500).json({ error: `Gemini SDK Error: ${error.message}` });
   }
 }
