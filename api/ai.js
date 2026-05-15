@@ -9,14 +9,14 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Prompt is required' });
   }
 
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = process.env.AI_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ error: 'GROQ_API_KEY environment variable is missing. Please add it to Vercel.' });
+    return res.status(500).json({ error: 'AI_API_KEY environment variable is missing. Please add it to your .env file or deployment settings.' });
   }
 
   try {
-    const groqResponse = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    const aiResponse = await fetch("https://api.freemodel.dev/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${apiKey}`,
@@ -24,29 +24,30 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         messages: [{ role: "user", content: prompt }],
-        model: "llama3-8b-8192", 
+        model: "gpt-4o-mini", 
         temperature: 0.7,
       })
     });
 
-    if (!groqResponse.ok) {
-      let errorText = 'Unknown error';
+    if (!aiResponse.ok) {
+      const errorText = await aiResponse.text();
+      let errorMessage = errorText;
       try {
-        const errorData = await groqResponse.json();
-        errorText = errorData.error?.message || JSON.stringify(errorData);
+        const errorData = JSON.parse(errorText);
+        errorMessage = errorData.error?.message || errorData.error || errorData.message || errorText;
       } catch (e) {
-        errorText = await groqResponse.text();
+        // Not JSON, use raw text
       }
-      return res.status(groqResponse.status).json({ error: `Groq API Error: ${errorText}` });
+      return res.status(aiResponse.status).json({ error: `AI API Error: ${errorMessage}` });
     }
 
-    const data = await groqResponse.json();
+    const data = await aiResponse.json();
     const responseText = data.choices?.[0]?.message?.content || "No response generated.";
     
     return res.status(200).json({ response: responseText });
 
   } catch (error) {
     console.error("Backend fetch error:", error);
-    return res.status(500).json({ error: "Failed to connect to Groq API." });
+    return res.status(500).json({ error: "Failed to connect to AI API." });
   }
 }

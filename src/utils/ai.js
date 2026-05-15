@@ -1,19 +1,20 @@
 export const fetchAiFeedback = async (prompt) => {
-  const response = await fetch("/api/groq", {
+  const response = await fetch("/api/ai", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt })
   });
 
   if (!response.ok) {
-    let errorText = 'Unknown error';
+    const errorText = await response.text();
+    let errorMessage = errorText;
     try {
-      const errorData = await response.json();
-      errorText = errorData.error || errorData.message || JSON.stringify(errorData);
+      const errorData = JSON.parse(errorText);
+      errorMessage = errorData.error || errorData.message || errorText;
     } catch (e) {
-      errorText = await response.text();
+      // Not JSON, use raw text
     }
-    throw new Error(`${errorText}`);
+    throw new Error(`${errorMessage}`);
   }
 
   const data = await response.json();
