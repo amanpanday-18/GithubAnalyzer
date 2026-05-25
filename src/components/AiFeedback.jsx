@@ -64,7 +64,7 @@ const AiFeedback = ({ user, repos }) => {
         <button 
           onClick={() => handleRequest('roast')}
           disabled={loading}
-          className="flex-1 flex items-center justify-center gap-2 py-3 bg-bokara border border-phantom hover:border-red-900/50 hover:bg-red-900/10 text-dusty rounded-xl transition-all disabled:opacity-50"
+          className="flex-1 flex items-center justify-center gap-2 py-3 bg-bokara border border-phantom hover:border-red-300 hover:bg-red-50 text-dusty rounded-xl transition-all disabled:opacity-50"
         >
           <Flame className="w-4 h-4 text-orange-400" />
           <span>Roast My Profile</span>
@@ -87,7 +87,7 @@ const AiFeedback = ({ user, repos }) => {
       )}
 
       {error && (
-        <div className="p-4 bg-red-900/10 border border-red-900/30 rounded-xl text-red-400 text-sm">
+        <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
           {error}
         </div>
       )}

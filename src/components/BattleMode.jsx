@@ -175,16 +175,16 @@ const BattleMode = () => {
         <button
           type="submit"
           disabled={loading || !input1.trim() || !input2.trim()}
-          className="px-8 py-4 bg-phantom hover:bg-phantom/80 text-dusty rounded-xl font-bold transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg"
+          className="px-8 py-4 bg-sphinx hover:bg-[#033B28] text-white rounded-xl font-bold transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg"
         >
           {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Battle!'}
         </button>
       </form>
 
       {error && (
-        <div className="max-w-2xl mx-auto mt-8 bg-bokara border border-red-900/50 rounded-xl p-6 flex items-center gap-4 animate-fade-in">
-          <AlertCircle className="w-8 h-8 text-red-400 shrink-0" />
-          <p className="text-red-400">{error}</p>
+        <div className="max-w-2xl mx-auto mt-8 bg-red-50 border border-red-200 rounded-xl p-6 flex items-center gap-4 animate-fade-in">
+          <AlertCircle className="w-8 h-8 text-red-500 shrink-0" />
+          <p className="text-red-600">{error}</p>
         </div>
       )}
 

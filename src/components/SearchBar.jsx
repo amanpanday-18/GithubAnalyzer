@@ -27,7 +27,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
       <button
         type="submit"
         disabled={isLoading || !input.trim()}
-        className="absolute right-2 top-2 bottom-2 px-6 bg-phantom hover:bg-anchovy text-dusty rounded-lg font-medium transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute right-2 top-2 bottom-2 px-6 bg-sphinx hover:bg-[#033B28] text-white rounded-lg font-medium transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? 'Searching...' : 'Analyze'}
       </button>

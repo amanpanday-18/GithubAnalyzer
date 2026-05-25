@@ -7,12 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        raven: '#09090B',   // Sleek black background
-        bokara: '#18181B',  // Card background
-        phantom: '#27272A', // Borders / secondary surface
-        anchovy: '#A1A1AA', // Muted text
-        sphinx: '#3B82F6',  // Professional Blue Accent
-        dusty: '#FAFAFA',   // White primary text
+        raven: '#F9F9F9',   // Light background
+        bokara: '#FFFFFF',  // White Card background
+        phantom: '#E5E7EB', // Light Borders / secondary surface
+        anchovy: '#4B5563', // Muted text
+        sphinx: '#004F37',  // Dark Forest Green Accent
+        dusty: '#091A12',   // Very dark green/black primary text
+        lime: '#D4F772',    // Lime green accent
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

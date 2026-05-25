@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Code2 } from 'lucide-react';
 
-const COLORS = ['#3B82F6', '#60A5FA', '#93C5FD', '#FAFAFA', '#A1A1AA', '#27272A'];
+const COLORS = ['#004F37', '#087352', '#3FB689', '#D4F772', '#E5E7EB', '#4B5563'];
 
 const LanguageChart = ({ repos }) => {
   const data = useMemo(() => {
@@ -49,14 +49,14 @@ const LanguageChart = ({ repos }) => {
               ))}
             </Pie>
             <Tooltip 
-              contentStyle={{ backgroundColor: '#18181B', borderColor: '#27272A', color: '#FAFAFA', borderRadius: '0.5rem' }}
-              itemStyle={{ color: '#FAFAFA' }}
+              contentStyle={{ backgroundColor: '#FFFFFF', borderColor: '#E5E7EB', color: '#091A12', borderRadius: '0.5rem' }}
+              itemStyle={{ color: '#091A12' }}
             />
             <Legend 
               verticalAlign="bottom" 
               height={36}
               iconType="circle"
-              wrapperStyle={{ color: '#A1A1AA', fontSize: '14px' }}
+              wrapperStyle={{ color: '#4B5563', fontSize: '14px' }}
             />
           </PieChart>
         </ResponsiveContainer>

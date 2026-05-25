@@ -73,11 +73,11 @@ function App() {
 
             {/* Error State */}
             {error && (
-              <div className="max-w-2xl mx-auto bg-bokara border border-red-900/50 rounded-xl p-6 flex items-center gap-4 animate-fade-in shadow-xl">
-                <AlertCircle className="w-8 h-8 text-red-400 shrink-0" />
+              <div className="max-w-2xl mx-auto bg-red-50 border border-red-200 rounded-xl p-6 flex items-center gap-4 animate-fade-in shadow-xl">
+                <AlertCircle className="w-8 h-8 text-red-500 shrink-0" />
                 <div>
-                  <h3 className="text-red-400 font-medium text-lg">Analysis Failed</h3>
-                  <p className="text-anchovy mt-1">{error}</p>
+                  <h3 className="text-red-700 font-medium text-lg">Analysis Failed</h3>
+                  <p className="text-red-600 mt-1">{error}</p>
                 </div>
               </div>
             )}
